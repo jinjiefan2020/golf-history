@@ -64,6 +64,50 @@
             "default": "https://dummyimage.com/500x500/0B422B/D4AF37&text=Golf+Champion"
         };
 
+        // 中英文名对照表
+        const EN_NAMES = {
+            "泰格·伍兹": "Tiger Woods",
+            "维杰·辛格": "Vijay Singh",
+            "帕德莱格·哈灵顿": "Padraig Harrington",
+            "吉姆·福瑞克": "Jim Furyk",
+            "卢克·唐纳德": "Luke Donald",
+            "罗里·麦克罗伊": "Rory McIlroy",
+            "乔丹·斯皮思": "Jordan Spieth",
+            "达斯汀·约翰逊": "Dustin Johnson",
+            "贾斯汀·托马斯": "Justin Thomas",
+            "布鲁克斯·科普卡": "Brooks Koepka",
+            "琼·拉姆": "Jon Rahm",
+            "斯科蒂·舍夫勒": "Scottie Scheffler",
+            "厄尼·埃尔斯": "Ernie Els",
+            "大卫·杜瓦尔": "David Duval",
+            "雷蒂夫·古森": "Retief Goosen",
+            "里奇·毕姆": "Rich Beem",
+            "迈克·维尔": "Mike Weir",
+            "菲尔·米克尔森": "Phil Mickelson",
+            "迈克尔·坎贝尔": "Michael Campbell",
+            "杰夫·奥格维": "Geoff Ogilvy",
+            "扎克·约翰逊": "Zach Johnson",
+            "崔佛·伊梅尔曼": "Trevor Immelman",
+            "梁容银": "Y.E. Yang",
+            "马丁·凯梅尔": "Martin Kaymer",
+            "基根·布拉德利": "Keegan Bradley",
+            "布兰德特·斯内德克": "Brandt Snedeker",
+            "亨里克·斯滕森": "Henrik Stenson",
+            "亚当·斯科特": "Adam Scott",
+            "巴巴·沃森": "Bubba Watson",
+            "杰森·戴伊": "Jason Day",
+            "贾斯汀·罗斯": "Justin Rose",
+            "弗兰西斯科·莫里纳利": "Francesco Molinari",
+            "布赖森·德尚博": "Bryson DeChambeau",
+            "科林·森川": "Collin Morikawa",
+            "帕特里克·坎特利": "Patrick Cantlay",
+            "卡梅隆·史密斯": "Cameron Smith",
+            "维克多·霍夫兰": "Viktor Hovland",
+            "赞德·谢奥菲勒": "Xander Schauffele",
+            "汤米·弗利特伍德": "Tommy Fleetwood",
+            "亚伦·莱伊": "Aaron Rai"
+        };
+
         // 详细的年度数据（补充了亚军和季军的文字描述）
         const data = [
             {
@@ -151,7 +195,7 @@
                             <li class="flex items-start bg-yellow-50/50 rounded-lg p-3 border border-yellow-100">
                                 <span class="mt-0.5 w-6 h-6 shrink-0 rounded-full bg-golf-gold text-white flex items-center justify-center text-xs font-bold mr-3 shadow-sm">1</span>
                                 <div>
-                                    <h4 class="font-bold text-gray-900 text-lg leading-none">${item.first}</h4>
+                                    <h4 class="font-bold text-gray-900 text-lg leading-none">${item.first}<span class="ml-1.5 text-sm font-normal text-gray-400">${EN_NAMES[item.first] || ''}</span></h4>
                                     <p class="text-sm text-gray-600 mt-2 leading-snug">${item.desc1}</p>
                                 </div>
                             </li>
@@ -159,7 +203,7 @@
                             <li class="flex items-start rounded-lg p-2">
                                 <span class="mt-0.5 w-6 h-6 shrink-0 rounded-full bg-golf-silver text-white flex items-center justify-center text-xs font-bold mr-3 shadow-sm">2</span>
                                 <div>
-                                    <h4 class="font-semibold text-gray-800 leading-none">${item.second}</h4>
+                                    <h4 class="font-semibold text-gray-800 leading-none">${item.second}<span class="ml-1.5 text-xs font-normal text-gray-400">${EN_NAMES[item.second] || ''}</span></h4>
                                     <p class="text-xs text-gray-500 mt-1.5 leading-snug">${item.desc2}</p>
                                 </div>
                             </li>
@@ -167,7 +211,7 @@
                             <li class="flex items-start rounded-lg p-2">
                                 <span class="mt-0.5 w-6 h-6 shrink-0 rounded-full bg-golf-bronze text-white flex items-center justify-center text-xs font-bold mr-3 shadow-sm">3</span>
                                 <div>
-                                    <h4 class="font-semibold text-gray-800 leading-none">${item.third}</h4>
+                                    <h4 class="font-semibold text-gray-800 leading-none">${item.third}<span class="ml-1.5 text-xs font-normal text-gray-400">${EN_NAMES[item.third] || ''}</span></h4>
                                     <p class="text-xs text-gray-500 mt-1.5 leading-snug">${item.desc3}</p>
                                 </div>
                             </li>
