@@ -27,14 +27,103 @@
             background-image: radial-gradient(#8B3060 1px, transparent 1px);
             background-size: 20px 20px;
         }
+        /* 高尔夫球抛物线动画 */
+        .gball-track {
+            position: absolute;
+            left: 24px;
+            bottom: 24px;
+            animation: gball-x 2.8s cubic-bezier(0.3, 0, 0.7, 1) 0.6s both;
+        }
+        @keyframes gball-x {
+            from { transform: translateX(0); }
+            to   { transform: translateX(calc(100vw - 72px)); }
+        }
+        .gball-arc {
+            animation: gball-y 2.8s ease-in-out 0.6s both;
+        }
+        @keyframes gball-y {
+            0%   { transform: translateY(0); }
+            52%  { transform: translateY(-185px); }
+            100% { transform: translateY(0); }
+        }
+        .gball {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 36% 30%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 55%),
+                radial-gradient(circle at 50% 50%, #f0f0f0 20%, #c8c8c8 65%, #909090 100%);
+            box-shadow: 2px 4px 12px rgba(0,0,0,0.65), inset -2px -2px 5px rgba(0,0,0,0.2);
+            animation: gball-spin 2.8s linear 0.6s both;
+            position: relative;
+            overflow: hidden;
+        }
+        .gball::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background-image:
+                radial-gradient(circle 2px at 28% 28%, rgba(60,60,60,0.35) 100%, transparent 0),
+                radial-gradient(circle 2px at 48% 20%, rgba(60,60,60,0.35) 100%, transparent 0),
+                radial-gradient(circle 2px at 67% 28%, rgba(60,60,60,0.30) 100%, transparent 0),
+                radial-gradient(circle 2px at 19% 46%, rgba(60,60,60,0.28) 100%, transparent 0),
+                radial-gradient(circle 2px at 38% 44%, rgba(60,60,60,0.35) 100%, transparent 0),
+                radial-gradient(circle 2px at 57% 43%, rgba(60,60,60,0.35) 100%, transparent 0),
+                radial-gradient(circle 2px at 75% 46%, rgba(60,60,60,0.28) 100%, transparent 0),
+                radial-gradient(circle 2px at 28% 62%, rgba(60,60,60,0.22) 100%, transparent 0),
+                radial-gradient(circle 2px at 48% 67%, rgba(60,60,60,0.22) 100%, transparent 0),
+                radial-gradient(circle 2px at 65% 62%, rgba(60,60,60,0.18) 100%, transparent 0),
+                radial-gradient(circle 2px at 38% 80%, rgba(60,60,60,0.12) 100%, transparent 0),
+                radial-gradient(circle 2px at 56% 77%, rgba(60,60,60,0.12) 100%, transparent 0);
+        }
+        @keyframes gball-spin {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(600deg); }
+        }
+        /* 巅峰皇冠特效 */
+        .crown-anchor {
+            position: relative;
+            display: inline-block;
+        }
+        .crown-svg {
+            position: absolute;
+            width: 52px;
+            height: 30px;
+            top: -38px;
+            left: calc(50% - 26px);
+            transform-origin: 26px 30px;
+            transform: scale(0);
+            opacity: 0;
+            animation: crown-pop 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275) 2.15s forwards;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.65));
+            pointer-events: none;
+        }
+        @keyframes crown-pop {
+            0%   { opacity: 0;   transform: scale(0); }
+            60%  { opacity: 1;   transform: scale(1.22); }
+            100% { opacity: 1;   transform: scale(1); }
+        }
     </style>
 </head>
 <body class="text-gray-800 antialiased">
-    <header class="hero-pattern text-white py-20 shadow-xl">
+    <header class="hero-pattern text-white py-20 shadow-xl relative overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-wider text-golf-gold">女子高尔夫巅峰对决录</h1>
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-wider text-golf-gold">女子高尔夫<span class="crown-anchor">巅峰<svg class="crown-svg" viewBox="0 0 52 30" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="3,26 3,15 12,4 21,15 26,1 31,15 40,4 49,15 49,26" fill="#D4AF37" stroke="#A07820" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+                    <rect x="3" y="23" width="46" height="6" rx="2" fill="#D4AF37" stroke="#A07820" stroke-width="1.2"/>
+                    <circle cx="26" cy="1" r="2.2" fill="#D4AF37" stroke="#A07820" stroke-width="1"/>
+                    <circle cx="12" cy="4"  r="1.8" fill="#D4AF37" stroke="#A07820" stroke-width="1"/>
+                    <circle cx="40" cy="4"  r="1.8" fill="#D4AF37" stroke="#A07820" stroke-width="1"/>
+                </svg></span>对决录</h1>
             <p class="text-xl md:text-2xl font-light opacity-90">2000 - 2026 年历届前三甲与年度战绩全景回顾</p>
             <div class="mt-8 inline-block w-24 h-1 bg-golf-gold rounded-full"></div>
+        </div>
+        <!-- 高尔夫球抛物线动画 -->
+        <div class="gball-track">
+            <div class="gball-arc">
+                <div class="gball"></div>
+            </div>
         </div>
     </header>
 
