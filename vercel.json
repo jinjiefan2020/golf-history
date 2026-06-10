@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/wiki/:path*",
+      "destination": "https://upload.wikimedia.org/:path*"
+    }
+  ]
+}

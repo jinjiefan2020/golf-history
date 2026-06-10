@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 破解图片防盗链 -->
     <meta name="referrer" content="no-referrer">
+    
     <title>2000-2026 男子高尔夫球坛巅峰对决录</title>
-    <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -13,12 +14,8 @@
                 extend: {
                     colors: {
                         golf: {
-                            dark: '#0B422B', // 大师赛绿
-                            light: '#146845',
-                            gold: '#D4AF37', // 冠军金
-                            silver: '#C0C0C0',
-                            bronze: '#CD7F32',
-                            bg: '#F5F7FA'
+                            dark: '#0B422B', light: '#146845', gold: '#D4AF37',
+                            silver: '#9CA3AF', bronze: '#D97706', bg: '#F5F7FA'
                         }
                     }
                 }
@@ -35,146 +32,146 @@
     </style>
 </head>
 <body class="text-gray-800 antialiased">
-
-    <!-- 顶部 Hero 区域 -->
     <header class="hero-pattern text-white py-20 shadow-xl">
         <div class="max-w-6xl mx-auto px-4 text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-wider text-golf-gold">男子高尔夫巅峰对决录</h1>
-            <p class="text-xl md:text-2xl font-light opacity-90">2000 - 2026 年历届最佳球手全景回顾</p>
+            <p class="text-xl md:text-2xl font-light opacity-90">2000 - 2026 年历届前三甲与年度战绩全景回顾</p>
             <div class="mt-8 inline-block w-24 h-1 bg-golf-gold rounded-full"></div>
         </div>
     </header>
 
-    <!-- 内容展示区 -->
-    <main class="max-w-6xl mx-auto px-4 py-12" id="app">
-        <!-- JS 会将数据渲染在这里 -->
-    </main>
+    <main class="max-w-7xl mx-auto px-4 py-12" id="app"></main>
 
     <footer class="bg-gray-900 text-gray-400 text-center py-8">
         <p>© 2026 Golf History Archive. Powered by Vercel.</p>
     </footer>
 
-    <!-- 核心逻辑与数据 -->
     <script>
-        // 核心图片图库 (维基共享资源直链)
+        // 人物配图库
         const IMAGES = {
-            "泰格·伍兹": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Tiger_Woods_2019_Masters.jpg/500px-Tiger_Woods_2019_Masters.jpg",
-            "维杰·辛格": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Vijay_Singh_2010.jpg/500px-Vijay_Singh_2010.jpg",
-            "帕德莱格·哈灵顿": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Padraig_Harrington_2008.jpg/500px-Padraig_Harrington_2008.jpg",
-            "吉姆·福瑞克": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Jim_Furyk_2008.jpg/500px-Jim_Furyk_2008.jpg",
-            "卢克·唐纳德": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Luke_Donald_2011_BMW.jpg/500px-Luke_Donald_2011_BMW.jpg",
-            "罗里·麦克罗伊": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Rory_McIlroy_2018.jpg/500px-Rory_McIlroy_2018.jpg",
-            "乔丹·斯皮思": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Jordan_Spieth_2014.jpg/500px-Jordan_Spieth_2014.jpg",
-            "达斯汀·约翰逊": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Dustin_Johnson_2014.jpg/500px-Dustin_Johnson_2014.jpg",
-            "贾斯汀·托马斯": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Justin_Thomas_2018.jpg/500px-Justin_Thomas_2018.jpg",
-            "布鲁克斯·科普卡": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Brooks_Koepka.jpg/500px-Brooks_Koepka.jpg",
-            "琼·拉姆": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Jon_Rahm_%2834642468704%29.jpg/500px-Jon_Rahm_%2834642468704%29.jpg",
-            "斯科蒂·舍夫勒": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Scottie_Scheffler_2021.jpg/500px-Scottie_Scheffler_2021.jpg",
-            "default": "https://images.unsplash.com/photo-1535139262971-c5184570f817?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+            "泰格·伍兹": "/wiki/wikipedia/commons/thumb/c/c5/Tiger_Woods_2019_Masters.jpg/500px-Tiger_Woods_2019_Masters.jpg",
+            "维杰·辛格": "/wiki/wikipedia/commons/thumb/6/6b/Vijay_Singh_2010.jpg/500px-Vijay_Singh_2010.jpg",
+            "帕德莱格·哈灵顿": "/wiki/wikipedia/commons/thumb/2/22/Padraig_Harrington_2008.jpg/500px-Padraig_Harrington_2008.jpg",
+            "吉姆·福瑞克": "/wiki/wikipedia/commons/thumb/b/ba/Jim_Furyk_2008.jpg/500px-Jim_Furyk_2008.jpg",
+            "卢克·唐纳德": "/wiki/wikipedia/commons/thumb/a/a2/Luke_Donald_2011_BMW.jpg/500px-Luke_Donald_2011_BMW.jpg",
+            "罗里·麦克罗伊": "/wiki/wikipedia/commons/thumb/2/27/Rory_McIlroy_2018.jpg/500px-Rory_McIlroy_2018.jpg",
+            "乔丹·斯皮思": "/wiki/wikipedia/commons/thumb/0/07/Jordan_Spieth_2014.jpg/500px-Jordan_Spieth_2014.jpg",
+            "达斯汀·约翰逊": "/wiki/wikipedia/commons/thumb/7/77/Dustin_Johnson_2014.jpg/500px-Dustin_Johnson_2014.jpg",
+            "贾斯汀·托马斯": "/wiki/wikipedia/commons/thumb/0/07/Justin_Thomas_2018.jpg/500px-Justin_Thomas_2018.jpg",
+            "布鲁克斯·科普卡": "/wiki/wikipedia/commons/thumb/f/fd/Brooks_Koepka.jpg/500px-Brooks_Koepka.jpg",
+            "琼·拉姆": "/wiki/wikipedia/commons/thumb/8/87/Jon_Rahm_%2834642468704%29.jpg/500px-Jon_Rahm_%2834642468704%29.jpg",
+            "斯科蒂·舍夫勒": "/wiki/wikipedia/commons/thumb/d/d4/Scottie_Scheffler_2021.jpg/500px-Scottie_Scheffler_2021.jpg",
+            "default": "https://dummyimage.com/500x500/0B422B/D4AF37&text=Golf+Champion"
         };
 
-        // 历史数据
+        // 详细的年度数据（补充了亚军和季军的文字描述）
         const data = [
             {
                 era: "伍兹的绝对统治时代 (2000 - 2009)",
                 years: [
-                    { year: 2000, first: "泰格·伍兹", second: "厄尼·埃尔斯", third: "维杰·辛格", desc: "不可思议的老虎全满贯之年，单年赢下3座大满贯。" },
-                    { year: 2001, first: "泰格·伍兹", second: "大卫·杜瓦尔", third: "雷蒂夫·古森", desc: "赢下大师赛，完成跨年连赢四大满贯壮举。" },
-                    { year: 2002, first: "泰格·伍兹", second: "厄尼·埃尔斯", third: "里奇·毕姆", desc: "包揽美国大师赛和美国公开赛冠军。" },
-                    { year: 2003, first: "泰格·伍兹", second: "维杰·辛格", third: "迈克·维尔", desc: "拿下5个美巡赛冠军蝉联年度最佳球员。" },
-                    { year: 2004, first: "维杰·辛格", second: "菲尔·米克尔森", third: "泰格·伍兹", desc: "终结伍兹统治，单赛季狂揽9胜含PGA锦标赛。" },
-                    { year: 2005, first: "泰格·伍兹", second: "菲尔·米克尔森", third: "迈克尔·坎贝尔", desc: "重返巅峰，包揽大师赛和英国公开赛两座大满贯。" },
-                    { year: 2006, first: "泰格·伍兹", second: "菲尔·米克尔森", third: "杰夫·奥格维", desc: "在父亲去世后强势回归，连赢英国公开赛和PGA。" },
-                    { year: 2007, first: "泰格·伍兹", second: "扎克·约翰逊", third: "帕德莱格·哈灵顿", desc: "赢下PGA锦标赛，夺得首届联邦快递杯总冠军。" },
-                    { year: 2008, first: "帕德莱格·哈灵顿", second: "泰格·伍兹", third: "崔佛·伊梅尔曼", desc: "单年豪夺英国公开赛和PGA锦标赛两座大满贯。" },
-                    { year: 2009, first: "泰格·伍兹", second: "菲尔·米克尔森", third: "梁容银", desc: "伤愈复出狂揽6胜，拿下联邦快递杯总冠军。" }
+                    { year: 2000, first: "泰格·伍兹", desc1: "不可思议的老虎全满贯之年，单年赢下3座大满贯。", second: "厄尼·埃尔斯", desc2: "在多个大满贯中屈居亚军，是唯一能稍微看到伍兹尾灯的人。", third: "维杰·辛格", desc3: "赢下当年的美国大师赛。" },
+                    { year: 2001, first: "泰格·伍兹", desc1: "赢下美国大师赛，完成了跨年的连赢四大满贯壮举。", second: "大卫·杜瓦尔", desc2: "赢下英国公开赛冠军。", third: "雷蒂夫·古森", desc3: "赢得美国公开赛冠军。" },
+                    { year: 2002, first: "泰格·伍兹", desc1: "包揽美国大师赛和美国公开赛冠军。", second: "厄尼·埃尔斯", desc2: "赢得英国公开赛冠军，世界排名稳居第二。", third: "里奇·毕姆", desc3: "在PGA锦标赛上顶住伍兹的压力夺冠。" },
+                    { year: 2003, first: "泰格·伍兹", desc1: "虽未赢大满贯，但拿下5个美巡赛冠军蝉联年度最佳球员。", second: "维杰·辛格", desc2: "拿到4个冠军并荣膺美巡赛奖金王。", third: "迈克·维尔", desc3: "赢下大师赛，成为首位赢得大满贯的加拿大球手。" },
+                    { year: 2004, first: "维杰·辛格", desc1: "终结伍兹统治，单赛季狂揽9胜含PGA锦标赛。", second: "菲尔·米克尔森", desc2: "终于打破无冕之王魔咒，赢下美国大师赛。", third: "泰格·伍兹", desc3: "全年状态处于动作调整期，但依然保持极高下限。" },
+                    { year: 2005, first: "泰格·伍兹", desc1: "重返巅峰，包揽大师赛和英国公开赛两座大满贯。", second: "菲尔·米克尔森", desc2: "赢下了当年的PGA锦标赛冠军。", third: "迈克尔·坎贝尔", desc3: "从资格赛打起并最终神奇夺得美国公开赛冠军。" },
+                    { year: 2006, first: "泰格·伍兹", desc1: "在父亲去世后强势回归，连赢英国公开赛和PGA锦标赛。", second: "菲尔·米克尔森", desc2: "赢下美国大师赛，拿下个人第三座大满贯。", third: "杰夫·奥格维", desc3: "在翼脚球场惊险赢下美国公开赛。" },
+                    { year: 2007, first: "泰格·伍兹", desc1: "赢下PGA锦标赛，并夺得首届联邦快递杯总冠军。", second: "扎克·约翰逊", desc2: "在恶劣天气中力克群雄赢下美国大师赛。", third: "帕德莱格·哈灵顿", desc3: "赢下英国公开赛。" },
+                    { year: 2008, first: "帕德莱格·哈灵顿", desc1: "单年豪夺英国公开赛和PGA锦标赛两座大满贯。", second: "泰格·伍兹", desc2: "拖着断腿在多利松奇迹般赢下美公开赛后赛季报销。", third: "崔佛·伊梅尔曼", desc3: "赢下美国大师赛。" },
+                    { year: 2009, first: "泰格·伍兹", desc1: "伤愈复出狂揽6胜，再次拿下联邦快递杯总冠军。", second: "菲尔·米克尔森", desc2: "赢得巡回锦标赛等3场胜利。", third: "梁容银", desc3: "在PGA锦标赛决赛轮击败伍兹，创造亚洲高尔夫历史。" }
                 ]
             },
             {
                 era: "群雄逐鹿与新老交替 (2010 - 2014)",
                 years: [
-                    { year: 2010, first: "吉姆·福瑞克", second: "马丁·凯梅尔", third: "菲尔·米克尔森", desc: "赢得联邦快递杯总冠军和年度最佳球员。" },
-                    { year: 2011, first: "卢克·唐纳德", second: "罗里·麦克罗伊", third: "基根·布拉德利", desc: "史无前例包揽美巡赛和欧巡赛双料奖金王。" },
-                    { year: 2012, first: "罗里·麦克罗伊", second: "泰格·伍兹", third: "布兰德特·斯内德克", desc: "8杆优势横扫PGA锦标赛，登顶世界第一。" },
-                    { year: 2013, first: "泰格·伍兹", second: "亨里克·斯滕森", third: "亚当·斯科特", desc: "重返世界第一，单年拿下5胜，获生涯最后一次POY。" },
-                    { year: 2014, first: "罗里·麦克罗伊", second: "巴巴·沃森", third: "马丁·凯梅尔", desc: "连赢英国公开赛和PGA锦标赛，展现统治力。" }
+                    { year: 2010, first: "吉姆·福瑞克", desc1: "赢得联邦快递杯总冠军和年度最佳球员。", second: "马丁·凯梅尔", desc2: "赢得PGA锦标赛，并很快登顶世界第一。", third: "菲尔·米克尔森", desc3: "赢下个人第三件绿夹克（美国大师赛）。" },
+                    { year: 2011, first: "卢克·唐纳德", desc1: "史无前例地包揽美巡赛和欧巡赛双料奖金王，稳居世界第一。", second: "罗里·麦克罗伊", desc2: "以创纪录的成绩赢下美国公开赛，新天王诞生。", third: "基根·布拉德利", desc3: "作为新秀赢下PGA锦标赛。" },
+                    { year: 2012, first: "罗里·麦克罗伊", desc1: "以8杆巨大优势横扫PGA锦标赛，登顶世界第一。", second: "泰格·伍兹", desc2: "状态强势回勇，单赛季拿下3个冠军。", third: "布兰德特·斯内德克", desc3: "凭借稳定发挥赢得联邦快递杯总冠军。" },
+                    { year: 2013, first: "泰格·伍兹", desc1: "重返世界第一，单年拿下5胜，夺得生涯最后一次POY。", second: "亨里克·斯滕森", desc2: "史无前例同年包揽美巡联邦杯和欧巡迪拜竞赛总冠军。", third: "亚当·斯科特", desc3: "赢下大师赛，打破澳大利亚球手的绿夹克魔咒。" },
+                    { year: 2014, first: "罗里·麦克罗伊", desc1: "连赢英国公开赛和PGA锦标赛，展现绝对统治力。", second: "巴巴·沃森", desc2: "赢得个人第二座美国大师赛冠军。", third: "马丁·凯梅尔", desc3: "以统治级表现赢下美国公开赛，并赢得球员锦标赛。" }
                 ]
             },
             {
                 era: "新生代霸主与战国时代 (2015 - 2023)",
                 years: [
-                    { year: 2015, first: "乔丹·斯皮思", second: "杰森·戴伊", third: "罗里·麦克罗伊", desc: "包揽大师赛、美公开赛，差一点实现年度全满贯。" },
-                    { year: 2016, first: "达斯汀·约翰逊", second: "罗里·麦克罗伊", third: "亨里克·斯滕森", desc: "突破心魔赢下美公开赛，荣膺年度最佳球员。" },
-                    { year: 2017, first: "贾斯汀·托马斯", second: "乔丹·斯皮思", third: "达斯汀·约翰逊", desc: "狂揽5胜含PGA锦标赛并赢下联邦快递杯。" },
-                    { year: 2018, first: "布鲁克斯·科普卡", second: "贾斯汀·罗斯", third: "弗兰西斯科·莫里纳利", desc: "包揽美国公开赛（卫冕）和PGA锦标赛。" },
-                    { year: 2019, first: "罗里·麦克罗伊", second: "布鲁克斯·科普卡", third: "泰格·伍兹", desc: "赢下球员锦标赛和联邦杯，靠稳定性夺得最佳球员。" },
-                    { year: 2020, first: "达斯汀·约翰逊", second: "布赖森·德尚博", third: "科林·森川", desc: "秋季大师赛创纪录夺冠，赢下联邦杯和最佳球员。" },
-                    { year: 2021, first: "琼·拉姆", second: "帕特里克·坎特利", third: "科林·森川", desc: "赢下美公开赛，全年表现稳定长期占据世界第一。" },
-                    { year: 2022, first: "斯科蒂·舍夫勒", second: "罗里·麦克罗伊", third: "卡梅隆·史密斯", desc: "年初爆发赢下4冠含大师赛，登顶世界第一。" },
-                    { year: 2023, first: "斯科蒂·舍夫勒", second: "琼·拉姆", third: "维克多·霍夫兰", desc: "创纪录卫冕球员锦标赛，蝉联年度最佳球员。" }
+                    { year: 2015, first: "乔丹·斯皮思", desc1: "包揽大师赛、美公开赛，差一点实现年度全满贯。", second: "杰森·戴伊", desc2: "赢下PGA锦标赛在内的5胜，与斯皮思争夺世界第一。", third: "罗里·麦克罗伊", desc3: "虽因脚踝受伤缺席部分比赛，但依然赢下迪拜竞赛。" },
+                    { year: 2016, first: "达斯汀·约翰逊", desc1: "突破心魔赢下美公开赛，荣膺年度最佳球员。", second: "罗里·麦克罗伊", desc2: "在巡回锦标赛逆转夺得联邦快递杯总冠军。", third: "亨里克·斯滕森", desc3: "在英国公开赛与米克尔森上演史诗对决并夺冠。" },
+                    { year: 2017, first: "贾斯汀·托马斯", desc1: "狂揽5胜含PGA锦标赛，并赢下联邦快递杯总冠军。", second: "乔丹·斯皮思", desc2: "赢下英国公开赛，距离生涯全满贯仅一步之遥。", third: "达斯汀·约翰逊", desc3: "长期霸占世界第一，拿下4场胜利。" },
+                    { year: 2018, first: "布鲁克斯·科普卡", desc1: "变身大满贯猎手，包揽美国公开赛（卫冕）和PGA锦标赛。", second: "贾斯汀·罗斯", desc2: "状态极其稳定，赢下联邦杯并短暂登顶世界第一。", third: "弗兰西斯科·莫里纳利", desc3: "赢下英国公开赛并在莱德杯五战全胜。" },
+                    { year: 2019, first: "罗里·麦克罗伊", desc1: "赢下球员锦标赛和联邦杯，靠惊人稳定性夺得最佳球员。", second: "布鲁克斯·科普卡", desc2: "成功卫冕PGA锦标赛，四大满贯全部打入前四名。", third: "泰格·伍兹", desc3: "上演体育史上最伟大的复出，夺得第五件大师赛绿夹克。" },
+                    { year: 2020, first: "达斯汀·约翰逊", desc1: "在秋季大师赛创纪录夺冠，并赢下联邦杯和最佳球员。", second: "布赖森·德尚博", desc2: "靠“暴力美学”摧毁翼脚球场，赢下美国公开赛。", third: "科林·森川", desc3: "新秀强势崛起，赢下PGA锦标赛。" },
+                    { year: 2021, first: "琼·拉姆", desc1: "赢下美国公开赛，全年表现稳定且长期占据世界第一。", second: "帕特里克·坎特利", desc2: "化身关键推杆机器，单季4胜赢下联邦杯。", third: "科林·森川", desc3: "赢下英国公开赛，两场大满贯首秀即夺冠创历史。" },
+                    { year: 2022, first: "斯科蒂·舍夫勒", desc1: "年初大爆发赢下4冠（包括大师赛），强势登顶世界第一。", second: "罗里·麦克罗伊", desc2: "史无前例地第三次赢得联邦快递杯总冠军。", third: "卡梅隆·史密斯", desc3: "惊天逆转连赢英国公开赛和球员锦标赛。" },
+                    { year: 2023, first: "斯科蒂·舍夫勒", desc1: "以创纪录的击球数据卫冕球员锦标赛，蝉联年度最佳球员。", second: "琼·拉姆", desc2: "赛季初狂揽4胜，并赢下美国大师赛。", third: "维克多·霍夫兰", desc3: "秋季大爆发，连赢宝马锦标赛和巡回锦标赛夺得联邦杯。" }
                 ]
             },
             {
                 era: "全满贯与两强争霸 (2024 - 2026)",
                 years: [
-                    { year: 2024, first: "斯科蒂·舍夫勒", second: "赞德·谢奥菲勒", third: "布赖森·德尚博", desc: "交出历史级表现，单季7胜含大师赛与奥运金牌。" },
-                    { year: 2025, first: "斯科蒂·舍夫勒", second: "罗里·麦克罗伊", third: "汤米·弗利特伍德", desc: "赢下PGA与英国公开赛；小麦赢下大师赛实现生涯全满贯。" },
-                    { year: 2026, first: "罗里·麦克罗伊", second: "亚伦·莱伊", third: "斯科蒂·舍夫勒", desc: "小麦大师赛背靠背夺冠，舍夫勒依旧统治榜单前列。" }
+                    { year: 2024, first: "斯科蒂·舍夫勒", desc1: "交出历史级统治赛季，单季7胜含大师赛与巴黎奥运金牌。", second: "赞德·谢奥菲勒", desc2: "迎来生涯大爆发，单年包揽PGA和英国公开赛两座大满贯。", third: "布赖森·德尚博", desc3: "在松树丛的绝杀救球惊艳全球，赢下单年的美公开赛。" },
+                    { year: 2025, first: "斯科蒂·舍夫勒", desc1: "豪夺PGA和英国公开赛，实现美巡赛年度最佳球员四连庄。", second: "罗里·麦克罗伊", desc2: "经过十几年苦苦挣扎，终于赢下大师赛实现生涯全满贯。", third: "汤米·弗利特伍德", desc3: "迎来职业生涯的巅峰突破，赢下联邦快递杯总冠军。" },
+                    { year: 2026, first: "罗里·麦克罗伊", desc1: "打破魔咒后彻底爆发，大师赛击败舍夫勒完成背靠背卫冕。", second: "亚伦·莱伊", desc2: "取得重大突破，凭借极高上球道率赢下PGA锦标赛。", third: "斯科蒂·舍夫勒", desc3: "虽然在大师赛屈居亚军，但仍凭借统治级数据稳居前列。" }
                 ]
             }
         ];
 
-        // 渲染页面
         const app = document.getElementById('app');
 
         data.forEach(period => {
-            // 时代标题
             const section = document.createElement('div');
             section.className = "mb-16";
             
             const titleHtml = `
                 <div class="flex items-center mb-8">
-                    <h2 class="text-3xl font-bold text-golf-dark">${period.era}</h2>
+                    <h2 class="text-3xl font-bold text-golf-dark drop-shadow-sm">${period.era}</h2>
                     <div class="flex-grow ml-4 h-px bg-gray-300"></div>
                 </div>
             `;
             
-            // 年份网格
             const grid = document.createElement('div');
-            grid.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8";
+            grid.className = "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8";
 
             period.years.forEach(item => {
                 const imgUrl = IMAGES[item.first] || IMAGES["default"];
                 const card = document.createElement('div');
-                card.className = "bg-white rounded-2xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl flex flex-col";
+                card.className = "bg-white rounded-2xl shadow-md overflow-hidden transform transition duration-300 hover:scale-[1.02] hover:shadow-xl flex flex-col";
                 
                 card.innerHTML = `
-                    <div class="relative h-56 overflow-hidden">
+                    <div class="relative h-48 overflow-hidden shrink-0">
                         <img src="${imgUrl}" alt="${item.first}" class="w-full h-full object-cover object-top" onerror="this.src='${IMAGES["default"]}'">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                         <div class="absolute bottom-4 left-4">
-                            <span class="bg-golf-gold text-white text-sm font-bold px-3 py-1 rounded-full shadow">${item.year} 年</span>
-                            <h3 class="text-2xl font-bold text-white mt-2">${item.first}</h3>
+                            <span class="bg-golf-gold text-white text-xs tracking-wider font-bold px-3 py-1 rounded-full shadow">${item.year} 年</span>
                         </div>
                     </div>
-                    <div class="p-6 flex-grow flex flex-col justify-between">
-                        <div>
-                            <p class="text-gray-600 text-sm mb-4 italic">"${item.desc}"</p>
-                            <ul class="space-y-3">
-                                <li class="flex items-center bg-yellow-50 rounded p-2">
-                                    <span class="w-6 h-6 rounded-full bg-golf-gold text-white flex items-center justify-center text-xs font-bold mr-3 shadow">1</span>
-                                    <span class="font-bold text-gray-800">${item.first} <span class="text-xs text-golf-gold ml-1 font-normal">(年度最佳)</span></span>
-                                </li>
-                                <li class="flex items-center bg-gray-50 rounded p-2">
-                                    <span class="w-6 h-6 rounded-full bg-gray-300 text-gray-700 flex items-center justify-center text-xs font-bold mr-3 shadow">2</span>
-                                    <span class="text-gray-700">${item.second}</span>
-                                </li>
-                                <li class="flex items-center bg-orange-50 rounded p-2">
-                                    <span class="w-6 h-6 rounded-full bg-orange-300 text-white flex items-center justify-center text-xs font-bold mr-3 shadow">3</span>
-                                    <span class="text-gray-700">${item.third}</span>
-                                </li>
-                            </ul>
-                        </div>
+                    
+                    <div class="p-5 flex-grow flex flex-col">
+                        <ul class="space-y-4">
+                            <!-- 第一名 -->
+                            <li class="flex items-start bg-yellow-50/50 rounded-lg p-3 border border-yellow-100">
+                                <span class="mt-0.5 w-6 h-6 shrink-0 rounded-full bg-golf-gold text-white flex items-center justify-center text-xs font-bold mr-3 shadow-sm">1</span>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 text-lg leading-none">${item.first}</h4>
+                                    <p class="text-sm text-gray-600 mt-2 leading-snug">${item.desc1}</p>
+                                </div>
+                            </li>
+                            <!-- 第二名 -->
+                            <li class="flex items-start rounded-lg p-2">
+                                <span class="mt-0.5 w-6 h-6 shrink-0 rounded-full bg-golf-silver text-white flex items-center justify-center text-xs font-bold mr-3 shadow-sm">2</span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 leading-none">${item.second}</h4>
+                                    <p class="text-xs text-gray-500 mt-1.5 leading-snug">${item.desc2}</p>
+                                </div>
+                            </li>
+                            <!-- 第三名 -->
+                            <li class="flex items-start rounded-lg p-2">
+                                <span class="mt-0.5 w-6 h-6 shrink-0 rounded-full bg-golf-bronze text-white flex items-center justify-center text-xs font-bold mr-3 shadow-sm">3</span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 leading-none">${item.third}</h4>
+                                    <p class="text-xs text-gray-500 mt-1.5 leading-snug">${item.desc3}</p>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 `;
                 grid.appendChild(card);
