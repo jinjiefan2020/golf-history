@@ -34,7 +34,7 @@
             position: absolute;
             left: 24px;
             bottom: 24px;
-            animation: gball-x 2.8s linear 0.6s both;
+            animation: gball-x 2.8s cubic-bezier(0.3, 0, 0.7, 1) 0.6s both;
         }
         @keyframes gball-x {
             from { transform: translateX(0); }
@@ -45,7 +45,7 @@
         }
         @keyframes gball-y {
             0%   { transform: translateY(0); }
-            52%  { transform: translateY(-165px); }
+            52%  { transform: translateY(-185px); }
             100% { transform: translateY(0); }
         }
         .gball {
@@ -85,12 +85,41 @@
             from { transform: rotate(0deg); }
             to   { transform: rotate(600deg); }
         }
+        /* 巅峰皇冠特效 */
+        .crown-anchor {
+            position: relative;
+            display: inline-block;
+        }
+        .crown-svg {
+            position: absolute;
+            width: 52px;
+            height: 30px;
+            top: -38px;
+            left: calc(50% - 26px);
+            transform-origin: 26px 30px;   /* 从皇冠底部中心弹出 */
+            transform: scale(0);
+            opacity: 0;
+            animation: crown-pop 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275) 2.15s forwards;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.65));
+            pointer-events: none;
+        }
+        @keyframes crown-pop {
+            0%   { opacity: 0;   transform: scale(0); }
+            60%  { opacity: 1;   transform: scale(1.22); }
+            100% { opacity: 1;   transform: scale(1); }
+        }
     </style>
 </head>
 <body class="text-gray-800 antialiased">
     <header class="hero-pattern text-white py-20 shadow-xl relative overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-wider text-golf-gold">男子高尔夫巅峰对决录</h1>
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-wider text-golf-gold">男子高尔夫<span class="crown-anchor">巅峰<svg class="crown-svg" viewBox="0 0 52 30" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="3,26 3,15 12,4 21,15 26,1 31,15 40,4 49,15 49,26" fill="#D4AF37" stroke="#A07820" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+                    <rect x="3" y="23" width="46" height="6" rx="2" fill="#D4AF37" stroke="#A07820" stroke-width="1.2"/>
+                    <circle cx="26" cy="1" r="2.2" fill="#D4AF37" stroke="#A07820" stroke-width="1"/>
+                    <circle cx="12" cy="4"  r="1.8" fill="#D4AF37" stroke="#A07820" stroke-width="1"/>
+                    <circle cx="40" cy="4"  r="1.8" fill="#D4AF37" stroke="#A07820" stroke-width="1"/>
+                </svg></span>对决录</h1>
             <p class="text-xl md:text-2xl font-light opacity-90">2000 - 2026 年历届前三甲与年度战绩全景回顾</p>
             <div class="mt-8 inline-block w-24 h-1 bg-golf-gold rounded-full"></div>
         </div>
