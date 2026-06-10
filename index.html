@@ -137,8 +137,8 @@
                 card.className = "bg-white rounded-2xl shadow-md overflow-hidden transform transition duration-300 hover:scale-[1.02] hover:shadow-xl flex flex-col";
                 
                 card.innerHTML = `
-                    <div class="relative h-48 overflow-hidden shrink-0">
-                        <img src="${imgUrl}" alt="${item.first}" class="w-full h-full object-cover object-top" onerror="this.src='${IMAGES["default"]}'">
+                    <div class="relative h-64 overflow-hidden shrink-0">
+                        <img src="${imgUrl}" alt="${item.first}" class="w-full h-full object-cover object-[center_15%]" onerror="this.src='${IMAGES["default"]}'">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                         <div class="absolute bottom-4 left-4">
                             <span class="bg-golf-gold text-white text-xs tracking-wider font-bold px-3 py-1 rounded-full shadow">${item.year} 年</span>
