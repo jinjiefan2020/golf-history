@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>2000-2026 女子高尔夫球坛巅峰对决录</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        golf: {
+                            dark: '#5C1A3A', light: '#8B3060', gold: '#D4AF37',
+                            silver: '#9CA3AF', bronze: '#D97706', bg: '#F5F7FA'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; background-color: #F5F7FA; }
+        .hero-pattern {
+            background-color: #5C1A3A;
+            background-image: radial-gradient(#8B3060 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+    <header class="hero-pattern text-white py-20 shadow-xl">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-wider text-golf-gold">女子高尔夫巅峰对决录</h1>
+            <p class="text-xl md:text-2xl font-light opacity-90">2000 - 2026 年历届前三甲与年度战绩全景回顾</p>
+            <div class="mt-8 inline-block w-24 h-1 bg-golf-gold rounded-full"></div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-12" id="app"></main>
+
+    <footer class="bg-gray-900 text-gray-400 text-center py-8">
+        <a href="index.html" class="inline-block mb-6 px-8 py-4 bg-golf-dark text-white text-lg font-bold rounded-full shadow-lg hover:bg-golf-light transition-colors duration-200">
+            ⛳ 切换到男子巅峰对决
+        </a>
+        <p>© 2026 Golf History Archive. Powered by Vercel.</p>
+    </footer>
+
+    <script>
+        // 人物配图库
+        const IMAGES = {
+            "凯莉·韦伯":       "/images/women/karrie.jpg",
+            "罗蕾娜·奥乔亚":   "/images/women/lorena.jpg",
+            "曾雅妮":           "/images/women/yani.jpg",
+            "朴仁妃":           "/images/women/inbee.jpg",
+            "高宝璟":           "/images/women/lydiako.png",
+            "阿瑞雅·朱塔妞佳": "/images/women/ariya.jpg",
+            "奈莉·科达":       "/images/women/nelly.jpg",
+            "default": "https://dummyimage.com/500x500/5C1A3A/D4AF37&text=Golf+Champion"
+        };
+
+        // 中英文名对照表
+        const EN_NAMES = {
+            "凯莉·韦伯":       "Karrie Webb",
+            "安妮卡·索伦斯坦": "Annika Sörenstam",
+            "朱莉·英科斯特":   "Juli Inkster",
+            "朴世莉":           "Se Ri Pak",
+            "朴祉垠":           "Grace Park",
+            "梅格·马伦":       "Meg Mallon",
+            "宝拉·克里默":     "Paula Creamer",
+            "罗蕾娜·奥乔亚":   "Lorena Ochoa",
+            "苏珊·彼得森":     "Suzann Pettersen",
+            "克里斯蒂·科尔":   "Cristie Kerr",
+            "曾雅妮":           "Yani Tseng",
+            "申智爱":           "Jiyai Shin",
+            "安娜·诺德奎斯特": "Anna Nordqvist",
+            "崔罗莲":           "Na Yeon Choi",
+            "史黛西·路易斯":   "Stacy Lewis",
+            "朴仁妃":           "Inbee Park",
+            "魏圣美":           "Michelle Wie",
+            "高宝璟":           "Lydia Ko",
+            "金世煐":           "Sei Young Kim",
+            "阿瑞雅·朱塔妞佳": "Ariya Jutanugarn",
+            "田仁智":           "In-Gee Chun",
+            "朴城炫":           "Sung Hyun Park",
+            "柳萧然":           "So Yeon Ryu",
+            "莱克西·汤普森":   "Lexi Thompson",
+            "高真荣":           "Jin Young Ko",
+            "李晶恩":           "Jeongeun Lee6",
+            "姜孝林":           "Danielle Kang",
+            "奈莉·科达":       "Nelly Korda",
+            "帕蒂·塔瓦坦纳吉": "Patty Tavatanakit",
+            "李旻智":           "Minjee Lee",
+            "珍妮弗·卡普乔":   "Jennifer Kupcho",
+            "莉莉娅·乌":       "Lilia Vu",
+            "席琳·波蒂尔":     "Céline Boutier",
+            "殷若宁":           "Ruoning Yin",
+            "笹生优花":         "Yuka Saso",
+            "阿塔雅·提提库":   "Atthaya Thitikul",
+            "山下美梦有":       "Miyu Yamashita",
+            "查莉·赫尔":       "Charley Hull"
+        };
+
+        const data = [
+            {
+                era: "索伦斯坦与韦伯的"双后争霸" (2000 - 2005)",
+                years: [
+                    { year: 2000, first: "凯莉·韦伯",       desc1: "实现大满贯与奖项的大满贯。独揽年度最佳球员(POY)、瓦尔奖(最低杆数)与奖金王，单季7胜并包揽纳贝斯克锦标赛与美国女子公开赛两座大满贯。",
+                      second: "安妮卡·索伦斯坦", desc2: "全年拿下5场胜利，但在各大奖项和积分上屈居韦伯之后。",
+                      third:  "朱莉·英科斯特",   desc3: "赢下LPGA锦标赛（大满贯）冠军及另外两场胜利。" },
+                    { year: 2001, first: "安妮卡·索伦斯坦", desc1: "开启霸主时代。包揽POY、瓦尔奖与奖金王，单季狂揽8胜（含纳贝斯克锦标赛大满贯），并打出史无前例的单轮59杆。",
+                      second: "凯莉·韦伯",       desc2: "赢下美国女子公开赛与LPGA锦标赛两座大满贯，实现职业生涯"超级全满贯"。",
+                      third:  "朴世莉",           desc3: "韩国先驱，拿下5胜含英国女子公开赛（当年升级为大满贯）。" },
+                    { year: 2002, first: "安妮卡·索伦斯坦", desc1: "无敌之年。再次横扫POY、瓦尔奖与奖金王，不可思议的单赛季11胜（含纳贝斯克大满贯）。",
+                      second: "朴世莉",           desc2: "单年5胜，并赢下LPGA锦标赛（大满贯），奖金榜位列第二。",
+                      third:  "朱莉·英科斯特",   desc3: "赢下含金量极高的美国女子公开赛（大满贯）。" },
+                    { year: 2003, first: "安妮卡·索伦斯坦", desc1: "蝉联三项大奖。包揽POY、瓦尔奖、奖金王，赢下LPGA锦标赛与英国女子公开赛两座大满贯，共计6胜。",
+                      second: "朴世莉",           desc2: "拿下3场胜利，并在奖金榜和最低杆数上仅次于安妮卡。",
+                      third:  "朴祉垠",           desc3: "全年表现极度稳定，虽无大满贯但奖金榜高居第三。" },
+                    { year: 2004, first: "安妮卡·索伦斯坦", desc1: "连续四年包揽三大奖。拿下POY、瓦尔奖与奖金王，8场胜利含LPGA锦标赛。",
+                      second: "朴祉垠",           desc2: "迎来生涯年，赢下纳贝斯克锦标赛（大满贯），并夺得瓦尔奖（最低杆数奖），奖金榜第二。",
+                      third:  "梅格·马伦",       desc3: "老将发威，赢下美国女子公开赛（大满贯）在内的单赛季3场胜利。" },
+                    { year: 2005, first: "安妮卡·索伦斯坦", desc1: "巅峰的完美收尾。第五次横扫POY、瓦尔奖与奖金王，豪取10胜，连赢纳贝斯克和LPGA两场大满贯。",
+                      second: "宝拉·克里默",     desc2: "以新秀身份狂揽2胜，夺得年度最佳新秀(ROY)，奖金榜飙升至第二。",
+                      third:  "罗蕾娜·奥乔亚",   desc3: "虽只拿1胜，但在奖金榜和最低杆数上均位列前三。" }
+                ]
+            },
+            {
+                era: "奥乔亚的接班与亚洲势力的全面崛起 (2006 - 2011)",
+                years: [
+                    { year: 2006, first: "罗蕾娜·奥乔亚",   desc1: "新后登基。终结安妮卡的垄断，单季6胜并首次横扫POY、瓦尔奖和奖金王。",
+                      second: "凯莉·韦伯",       desc2: "迎来第二春，豪取5胜含纳贝斯克大满贯。",
+                      third:  "安妮卡·索伦斯坦", desc3: "因伤病状态下滑，但仍赢下美国女子公开赛（大满贯）在内的3胜。" },
+                    { year: 2007, first: "罗蕾娜·奥乔亚",   desc1: "绝对统治。蝉联POY、瓦尔奖和奖金王，单年8胜，并在圣安德鲁斯赢下首座大满贯（英国公开赛）。",
+                      second: "苏珊·彼得森",     desc2: "斩获5胜及LPGA锦标赛（大满贯），奖金榜排名第二。",
+                      third:  "克里斯蒂·科尔",   desc3: "赢下美国女子公开赛（大满贯）。" },
+                    { year: 2008, first: "罗蕾娜·奥乔亚",   desc1: "第三年横扫POY、瓦尔奖和奖金王，单年7胜并赢下纳贝斯克大满贯。",
+                      second: "曾雅妮",           desc2: "新秀年即夺得LPGA锦标赛（大满贯），荣膺年度最佳新秀。",
+                      third:  "宝拉·克里默",     desc3: "单赛季斩获4胜，奖金榜位列第二。" },
+                    { year: 2009, first: "罗蕾娜·奥乔亚",   desc1: "拿下3胜，连续第四次荣膺年度最佳球员(POY)和瓦尔奖，随后在次年退役。",
+                      second: "申智爱",           desc2: "单季3胜，以新秀身份荣膺奖金王(Money Winner)与年度最佳新秀。",
+                      third:  "安娜·诺德奎斯特", desc3: "以新秀身份赢下LPGA锦标赛（大满贯）。" },
+                    { year: 2010, first: "曾雅妮",           desc1: "单年赢下纳贝斯克和英国女子公开赛两座大满贯，登顶年度最佳球员(POY)。",
+                      second: "崔罗莲",           desc2: "凭借极其精准的铁杆包揽最低杆数奖(瓦尔奖)和奖金王，拿下2胜。",
+                      third:  "克里斯蒂·科尔",   desc3: "赢下LPGA锦标赛（大满贯）在内的2胜。" },
+                    { year: 2011, first: "曾雅妮",           desc1: "历史级大爆发。毫无悬念横扫POY、瓦尔奖、奖金王。单年狂揽7胜及两座大满贯（LPGA与英国公开赛）。",
+                      second: "史黛西·路易斯",   desc2: "赢下纳贝斯克锦标赛（大满贯）。",
+                      third:  "苏珊·彼得森",     desc3: "全年拿下2胜，奖金榜和平均杆数均位列第二。" }
+                ]
+            },
+            {
+                era: "百花齐放与"韩国军团"的统治 (2012 - 2019)",
+                years: [
+                    { year: 2012, first: "史黛西·路易斯",   desc1: "终结亚洲球员垄断，单年4胜，依靠全年稳定积分勇夺年度最佳球员(POY)。",
+                      second: "朴仁妃",           desc2: "包揽瓦尔奖（最低杆数）和奖金王，拿下2胜。",
+                      third:  "崔罗莲",           desc3: "赢下含金量最高的美国女子公开赛（大满贯）。" },
+                    { year: 2013, first: "朴仁妃",           desc1: "史诗级表现。包揽POY与奖金王，单年6胜，史无前例地连赢年度前三场大满贯（纳贝斯克、LPGA、美国女子公开赛）。",
+                      second: "苏珊·彼得森",     desc2: "赢下升格大满贯后的首届依云锦标赛，单年4胜，奖金榜第二。",
+                      third:  "史黛西·路易斯",   desc3: "赢下英国女子公开赛（大满贯），并夺得瓦尔奖。" },
+                    { year: 2014, first: "史黛西·路易斯",   desc1: "全面开花。单季3胜，强势包揽年度最佳球员(POY)、奖金王和瓦尔奖。",
+                      second: "朴仁妃",           desc2: "赢下LPGA锦标赛（大满贯），单季3胜，各项数据位列次席。",
+                      third:  "魏圣美",           desc3: "天才少女圆梦松树丛，赢下美国女子公开赛（大满贯）。" },
+                    { year: 2015, first: "高宝璟",           desc1: "18岁的天才统治。拿下5胜及依云锦标赛（大满贯），夺得年度最佳球员(POY)与奖金王。",
+                      second: "朴仁妃",           desc2: "豪揽5胜并夺得两座大满贯（KPMG女子PGA锦标赛、英国公开赛），斩获瓦尔奖。",
+                      third:  "金世煐",           desc3: "单季3胜，夺得年度最佳新秀。" },
+                    { year: 2016, first: "阿瑞雅·朱塔妞佳", desc1: "横扫球坛。单年5胜含英国公开赛（大满贯），包揽POY与奖金王。",
+                      second: "高宝璟",           desc2: "赢下全日空锦标赛（大满贯）在内的4胜，积分紧咬阿瑞雅。",
+                      third:  "田仁智",           desc3: "以历史级-21杆赢下依云锦标赛（大满贯），并夺得瓦尔奖。" },
+                    { year: 2017, first: "朴城炫",           desc1: "赢下美国女子公开赛（大满贯），创纪录地包揽年度最佳新秀、奖金王，并共享年度最佳球员(POY)。",
+                      second: "柳萧然",           desc2: "赢下全日空锦标赛（大满贯），与朴城炫共享年度最佳球员(POY)。",
+                      third:  "莱克西·汤普森",   desc3: "夺得瓦尔奖与CME全球竞赛总冠军（百万大奖），拿下2胜。" },
+                    { year: 2018, first: "阿瑞雅·朱塔妞佳", desc1: "再次横扫。赢下美国女子公开赛，包揽POY、瓦尔奖、奖金王及CME总冠军。",
+                      second: "朴城炫",           desc2: "赢下KPMG女子PGA锦标赛（大满贯），单季3胜。",
+                      third:  "李旻智",           desc3: "全年极其稳定，奖金榜与CME积分高居第二。" },
+                    { year: 2019, first: "高真荣",           desc1: "绝对统治。单年4胜，包揽全日空锦标赛和依云锦标赛两座大满贯，横扫POY、瓦尔奖与奖金王。",
+                      second: "金世煐",           desc2: "单季3胜，在最终战CME巡回锦标赛绝杀夺得总冠军。",
+                      third:  "李晶恩",           desc3: "赢下美国女子公开赛（大满贯），荣膺年度最佳新秀。" }
+                ]
+            },
+            {
+                era: "新生代混战与科达的崛起 (2020 - 2023)",
+                years: [
+                    { year: 2020, first: "金世煐",           desc1: "以破纪录成绩赢下KPMG女子PGA锦标赛（大满贯），加冕年度最佳球员(POY)。",
+                      second: "高真荣",           desc2: "全年仅参加4场比赛，却在最终CME夺冠，神奇保住奖金王。",
+                      third:  "姜孝林",           desc3: "拿下2胜，夺得瓦尔奖（最低杆数）。" },
+                    { year: 2021, first: "高真荣",           desc1: "后半程疯狂发力，单季狂揽5胜，并在CME最终战击败科达，硬核逆转夺得年度最佳球员(POY)与奖金王。",
+                      second: "奈莉·科达",       desc2: "赢下KPMG女子PGA锦标赛（大满贯）并在东京奥运会夺冠，全年4胜，长期占据世界第一。",
+                      third:  "帕蒂·塔瓦坦纳吉", desc3: "赢下全日空锦标赛（大满贯），荣膺年度最佳新秀。" },
+                    { year: 2022, first: "高宝璟",           desc1: "时隔7年王者归来。单年3胜并赢下CME最终战，包揽POY、瓦尔奖与奖金王三大最高荣誉。",
+                      second: "李旻智",           desc2: "以破纪录成绩赢下美国女子公开赛（大满贯），POY积分排名第二。",
+                      third:  "珍妮弗·卡普乔",   desc3: "赢下雪佛龙锦标赛（大满贯），单年豪取3胜。" },
+                    { year: 2023, first: "莉莉娅·乌",       desc1: "破茧成蝶。单年4胜，包揽雪佛龙锦标赛与英国公开赛两座大满贯，夺得年度最佳球员(POY)与奖金王。",
+                      second: "席琳·波蒂尔",     desc2: "在本土依云锦标赛（大满贯）夺魁，单年狂揽4胜。",
+                      third:  "殷若宁",           desc3: "20岁赢下KPMG女子PGA锦标赛（大满贯），夺得2胜并成功登顶世界第一。" }
+                ]
+            },
+            {
+                era: "当代霸主与天才的传承 (2024 - 2026 至今)",
+                years: [
+                    { year: 2024, first: "奈莉·科达",       desc1: "打出了LPGA历史上最疯狂的连胜纪录，年初连赢5场比赛，单赛季豪夺7胜（含雪佛龙锦标赛大满贯），毫无悬念地锁定LPGA年度最佳球员(POY)。",
+                      second: "高宝璟",           desc2: "在巴黎奥运会摘得金牌，随后背靠背赢下AIG英国女子公开赛（大满贯），集齐积分正式入驻LPGA名人堂。",
+                      third:  "笹生优花",         desc3: "在极高难度的兰卡斯特乡村俱乐部展现抗压能力，三年内第二次赢下美国女子公开赛（大满贯）。" },
+                    { year: 2025, first: "阿塔雅·提提库",   desc1: "绝对的历史第一统治级表现。击败所有对手包揽LPGA年度最佳球员(POY)和瓦尔奖。创下68.68的单赛季平均杆数，直接打破安妮卡·索伦斯坦保持了20多年的历史纪录，并在CME最终站豪夺400万美元大奖。",
+                      second: "奈莉·科达",       desc2: "全年表现依旧顶级，在各大积分榜、奖金榜与胜场数上是唯一能与提提库全程抗衡的巨星。",
+                      third:  "山下美梦有",       desc3: "作为超级新人强势登陆LPGA，凭借极度稳定的发挥拿下年度最佳新秀(ROY)，并在多场大满贯中冲击冠军。" },
+                    { year: 2026, first: "奈莉·科达",       desc1: "新晋美国女子公开赛冠军！刚刚在严酷考验的里维埃拉球场力压群雄夺得2026年美国女子公开赛（大满贯）桂冠！这是她职业生涯的第4座大满贯，牢牢捍卫一姐宝座。",
+                      second: "查莉·赫尔",       desc2: "在美国女子公开赛决赛轮交出精彩的67杆，以微弱差距屈居亚军，展现了极强的大满贯竞争力。",
+                      third:  "阿塔雅·提提库",   desc3: "延续去年破纪录的极佳手感，在本赛季前半程依然稳居世界前列与积分榜头部。" }
+                ]
+            }
+        ];
+
+        const app = document.getElementById('app');
+
+        data.forEach(period => {
+            const section = document.createElement('div');
+            section.className = "mb-16";
+
+            const titleHtml = `
+                <div class="flex items-center mb-8">
+                    <h2 class="text-3xl font-bold text-golf-dark drop-shadow-sm">${period.era}</h2>
+                    <div class="flex-grow ml-4 h-px bg-gray-300"></div>
+                </div>
+            `;
+
+            const grid = document.createElement('div');
+            grid.className = "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8";
+
+            period.years.forEach(item => {
+                const imgUrl = IMAGES[item.first] || IMAGES["default"];
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl shadow-md overflow-hidden transform transition duration-300 hover:scale-[1.02] hover:shadow-xl flex flex-col";
+
+                card.innerHTML = `
+                    <div class="relative h-64 overflow-hidden shrink-0">
+                        <img src="${imgUrl}" alt="${item.first}" class="w-full h-full object-cover object-[center_15%]" onerror="this.src='${IMAGES["default"]}'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-golf-gold text-white text-xs tracking-wider font-bold px-3 py-1 rounded-full shadow">${item.year} 年</span>
+                        </div>
+                    </div>
+
+                    <div class="p-5 flex-grow flex flex-col">
+                        <ul class="space-y-4">
+                            <!-- 第一名 -->
+                            <li class="flex items-start bg-yellow-50/50 rounded-lg p-3 border border-yellow-100">
+                                <span class="mt-0.5 w-6 h-6 shrink-0 rounded-full bg-golf-gold text-white flex items-center justify-center text-xs font-bold mr-3 shadow-sm">1</span>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 text-lg leading-none">${item.first}<span class="ml-1.5 text-sm font-bold text-gray-600">${EN_NAMES[item.first] || ''}</span></h4>
+                                    <p class="text-sm text-gray-600 mt-2 leading-snug">${item.desc1}</p>
+                                </div>
+                            </li>
+                            <!-- 第二名 -->
+                            <li class="flex items-start rounded-lg p-2">
+                                <span class="mt-0.5 w-6 h-6 shrink-0 rounded-full bg-golf-silver text-white flex items-center justify-center text-xs font-bold mr-3 shadow-sm">2</span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 leading-none">${item.second}<span class="ml-1.5 text-xs font-bold text-gray-600">${EN_NAMES[item.second] || ''}</span></h4>
+                                    <p class="text-xs text-gray-500 mt-1.5 leading-snug">${item.desc2}</p>
+                                </div>
+                            </li>
+                            <!-- 第三名 -->
+                            <li class="flex items-start rounded-lg p-2">
+                                <span class="mt-0.5 w-6 h-6 shrink-0 rounded-full bg-golf-bronze text-white flex items-center justify-center text-xs font-bold mr-3 shadow-sm">3</span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 leading-none">${item.third}<span class="ml-1.5 text-xs font-bold text-gray-600">${EN_NAMES[item.third] || ''}</span></h4>
+                                    <p class="text-xs text-gray-500 mt-1.5 leading-snug">${item.desc3}</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            section.innerHTML = titleHtml;
+            section.appendChild(grid);
+            app.appendChild(section);
+        });
+    </script>
+</body>
+</html>
